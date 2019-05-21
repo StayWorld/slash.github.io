@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CATransaction理解 官方文档:CATransaction is the Core Animation mechanism for batching multiple layer-tree operations into atomic updates to the render tree. Every modification to a layer tree must be part o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2019/05/21/CATransaction理解/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="CATransaction理解 官方文档:CATransaction is the Core Animation mechanism for batching multiple layer-tree operations into atomic updates to the render tree. Every modification to a layer tree must be part o">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-21T06:53:36.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="CATransaction理解 官方文档:CATransaction is the Core Animation mechanism for batching multiple layer-tree operations into atomic updates to the render tree. Every modification to a layer tree must be part o">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-CATransaction理解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/21/CATransaction理解/" class="article-date">
+  <time datetime="2019-05-21T06:53:36.975Z" itemprop="datePublished">2019-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="CATransaction理解"><a href="#CATransaction理解" class="headerlink" title="CATransaction理解"></a>CATransaction理解</h4><blockquote>
+<p>官方文档:<br>CATransaction is the Core Animation mechanism for batching multiple layer-tree operations into atomic updates to the render tree. Every modification to a layer tree must be part of a transaction. Nested transactions are supported.<br>CATransaction是事务，用于批量提交多个对layer-tree的操作，并且是原子性的。所有对layer-tree的修改都必须包含在事务内。事务是可以嵌套的。</p>
+</blockquote>
+<ol>
+<li><h5 id="嵌套事务"><a href="#嵌套事务" class="headerlink" title="嵌套事务"></a>嵌套事务</h5></li>
+</ol>
+<ul>
+<li>事务允许嵌套， 但是嵌套在内层的事务不能被立即commit，会在最外层的事务结束后统一commit。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[CATransaction beigin];</span><br><span class="line">// 设置变化动画过程是否显示，默认为YES不显示</span><br><span class="line">[CATransaction setDisableActions:YES];</span><br><span class="line"></span><br><span class="line">layer.cornerRadius = (layer.cornerRadius == 0.0f) ? 30.0f : 0.0f;</span><br><span class="line"></span><br><span class="line">[CATransaction commit];</span><br><span class="line"></span><br><span class="line">//上面的动画并不会立即执行，需要等最外层的commit</span><br><span class="line"></span><br><span class="line">[NSThread sleepForTimeInterval:10];</span><br><span class="line"></span><br><span class="line">//显式事务默认开启动画效果,kCFBooleanTrue关闭</span><br><span class="line"></span><br><span class="line">[CATransaction setValue:(id)kCFBooleanFalse</span><br><span class="line"></span><br><span class="line">                 forKey:kCATransactionDisableActions];</span><br><span class="line"></span><br><span class="line">//动画执行时间</span><br><span class="line"></span><br><span class="line">[CATransaction setValue:[NSNumber numberWithFloat:10.0f] forKey:kCATransactionAnimationDuration];</span><br><span class="line"></span><br><span class="line">//[CATransaction setAnimationDuration:[NSNumber numberWithFloat:5.0f]];</span><br><span class="line"></span><br><span class="line">anotherLayer.cornerRadius = (anotherLayer.cornerRadius == 0.0f) ? 30.0f : 0.0f;</span><br><span class="line"></span><br><span class="line">[CATransaction commit];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol start="2">
+<li><h5 id="隐私CATransaction"><a href="#隐私CATransaction" class="headerlink" title="隐私CATransaction"></a>隐私CATransaction</h5><ul>
+<li>所有对layer-tree的操作都必须处于事务。修改UIView的属性最终也是修改到了layer-tree。当我们改动layer-tree时，如果当前没有显示创建CATransaction，系统会创建一个隐式的CATransaction，这个隐式CATransaction会在RunLoop结束时commit。</li>
+</ul>
+</li>
+<li><h5 id="显示CATransaction"><a href="#显示CATransaction" class="headerlink" title="显示CATransaction"></a>显示CATransaction</h5></li>
+</ol>
+<ul>
+<li>手动创建CATransaction, 设置一些列参数</li>
+</ul>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><ul>
+<li><a href="http://jefferyfan.github.io/2016/06/27/programing/iOS/CATransaction/" target="_blank" rel="noopener">理解CATransaction</a></li>
+<li><a href="https://www.jianshu.com/p/a04abd33c28f" target="_blank" rel="noopener">iOS-CATransaction</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/21/CATransaction理解/" data-id="cjvxkess90000shcbnxbr7ljy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/21/iterm 配置字体/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/21/CATransaction理解/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/21/iterm 配置字体/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
