@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.jpeg">
+    <link rel="icon" type="image/png" href="/favicon.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content>
+    <meta name="author" content="John Doe">
+    <meta name="keywords" content>
+    <title>iterm2 配置字体 ~ Slash&#39;Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.7.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.7.4/css/mdb.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_vr10bjtg3us.css">
+    
+        <link rel="stylesheet" href="/css/Prettify/tomorrow-night-eighties.min.css">
+    
+</head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+<div class="container">
+    <a class="navbar-brand" href="/"><strong>Slash&#39;Blog</strong></a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/archives/">Archives</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/about/">About</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+
+</nav>
+    <div class="view intro-2" style='background: url("https://i.imgur.com/oADD1Ip.jpg")no-repeat center center;background-size: cover;'>
+    <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+        <div class="container text-center white-text wow fadeInUp">
+            <p class="h2">iterm2 配置字体</p>
+            <br>
+            
+            <p>Wednesday, May 22nd 2019, 10:19 am</p>
+            
+        </div>
+        </div>
+    </div>
+    </div>
+  </header>
+
+  <main>
+  
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 ">
+            <div class="post-content py-5 z-depth-3 main">
+                <h5 id="1-首先安装iTerm2"><a href="#1-首先安装iTerm2" class="headerlink" title="1. 首先安装iTerm2"></a>1. 首先安装<code>iTerm2</code></h5><ul>
+<li><a href="https://github.com/gnachman/iTerm2" target="_blank" rel="noopener">GitHub</a></li>
+</ul>
+<h5 id="2-安装powerline"><a href="#2-安装powerline" class="headerlink" title="2. 安装powerline"></a>2. 安装powerline</h5><pre><code class="ruby"> // 没有安装pip先安装pip
+ sudo easy_install pip
+
+ // 之后安装powerline（这里可能会报错， 可以参考问题解决）
+ pip install powerline-status
+</code></pre>
+<h5 id="3-安装oh-my-zsh"><a href="#3-安装oh-my-zsh" class="headerlink" title="3.安装oh-my-zsh"></a>3.安装oh-my-zsh</h5><pre><code class="ruby">curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+</code></pre>
+<h5 id="4-安装字体库fonts"><a href="#4-安装字体库fonts" class="headerlink" title="4.安装字体库fonts"></a>4.安装字体库<a href="https://github.com/powerline/fonts" target="_blank" rel="noopener">fonts</a></h5><pre><code class="ruby">// 克隆字体库到本地
+git clone https://github.com/powerline/fonts.git
+// 安装字体
+cd fonts 
+./install.sh
+
+
+安装成功之后输出：
+copying fonts...
+Powerline fonts installed to /Users/slash/Library/Fonts
+</code></pre>
+<h5 id="5-导入配色"><a href="#5-导入配色" class="headerlink" title="5.导入配色"></a>5.导入配色</h5><ul>
+<li>首先下载<a href="https://github.com/altercation/solarized" target="_blank" rel="noopener">solarized</a><pre><code class="ruby">git clone https://github.com/altercation/solarized
+</code></pre>
+</li>
+<li>解压zip文件， 进入solarized、iterm2-colors-solarized文件， 双击Solarized<br>Dark.itermcolors和Solarized Light.itermcolors进行安装导入，如下图所示<br><img src="https://user-gold-cdn.xitu.io/2018/5/20/1637e1a0a8980e6e?imageslim" alt="1637e1a0a8980e6e?imageslim"></li>
+<li><p>进入系统偏好设置， profiles-&gt;Colors选择刚刚导入的配色方案即可<br><img src="https://user-gold-cdn.xitu.io/2018/5/20/1637e1a0a8c30214?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="1"></p>
+<h5 id="6-主题设置"><a href="#6-主题设置" class="headerlink" title="6.主题设置"></a>6.主题设置</h5></li>
+<li><p>使用agnoster， 下载安装：</p>
+<pre><code class="ruby">// 克隆主题到本地
+git clone  https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor
+//安装主题
+cd oh-my-zsh-agnoster-fcamblor
+./install
+</code></pre>
+</li>
+<li><p>安装成功之后， open ~/.zshrc文件， 将ZSH_THEME改为agnoster</p>
+<pre><code class="ruby"># Set name of the theme to load. Optionally, if you set this to &quot;random&quot;
+# it&#39;ll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME=&quot;agnoster&quot;
+</code></pre>
+</li>
+<li><p>更改完成之后需要保存</p>
+<pre><code class="ruby">chsh -s /bin/zsh
+</code></pre>
+</li>
+</ul>
+<h5 id="7-添加指令高亮效果zsh-syntax-highlighting"><a href="#7-添加指令高亮效果zsh-syntax-highlighting" class="headerlink" title="7. 添加指令高亮效果zsh-syntax-highlighting"></a>7. 添加指令高亮效果<a href="https://github.com/zsh-users/zsh-syntax-highlighting" target="_blank" rel="noopener">zsh-syntax-highlighting</a></h5><ul>
+<li><p>下载文件</p>
+<pre><code class="ruby">// 克隆项目到本地
+git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+</code></pre>
+</li>
+<li><p>open ~/.zshrc文件，在最后添加如下内容</p>
+<pre><code class="ruby">source /Users/slash（替换成自己的名称）/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+plugins=(zsh-syntax-highlighting)
+</code></pre>
+</li>
+<li><p>最后别忘了要保存修改的内容</p>
+<pre><code class="ruby">chsh -s /bin/zsh
+</code></pre>
+</li>
+</ul>
+
+                <hr>
+                <div>
+                    <p>
+                         
+                        <span class="badge badge-light">#&nbsp;iterm2</span>
+                        &nbsp;
+                        
+                    </p>
+                </div>
+                <br>
+                
+                    <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                
+            </div>
+        </div>
+        <div class="d-none d-md-block col-md-2">
+            
+  <div id="toc" class="py-5">
+    <p class="h6"><i class="iconfont icon-toc" style="vertical-align:middle"></i> Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+        </div>
+    </div>        
+</div>
+
+<br><br><br>
+
+<!-- Comments -->
+<div class="comments" id="comments">
+ 
+</div>
+  
+  </main>
+
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank"><b>HEXO</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/0x2e/Material-T" target="_blank"> <b>Material-T</b></a>
+  </div>
+</footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.7.4/js/jquery-3.3.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.7.4/js/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.7.4/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.7.4/js/mdb.min.js"></script>
+  <script src="/js/main.js"></script>
+  
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    
+    <script src="/js/post.js"></script>
+    
+      <script src="/js/plugins/prettify.js"></script>
+      <script>
+          $(document).ready(function(){
+              $('pre').addClass('prettyprint linenums');
+              prettyPrint();
+          })
+      </script>
+    
+  
+</body>
+</html>
